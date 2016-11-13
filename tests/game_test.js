@@ -216,6 +216,39 @@ describe('Game', function() {
             });
         });
 
+        describe('WithExtremeCoordinatesInPlaceCommand', function() {
+            it('Prevents placing player for extreme high unsafe PLACE coordinates', function () {
+                var commands = "PLACE 9007199254740992,9007199254740992,NORTH";
+                var boardDimensions = {width: 5, height: 5};
+                var game = new Game(boardDimensions, commands);
+                game.processCommands();
+                expect(game.player.placeCurrent.xCoordinate).to.equal(undefined);
+                expect(game.player.placeCurrent.yCoordinate).to.equal(undefined);
+                expect(game.player.placeCurrent.faceDirection).to.equal(undefined);
+                expect(game.board.layout[["0,0"]]).to.equal("");
+            });
+            it('Prevents placing player for extreme low unsafe PLACE coordinates', function () {
+                var commands = "PLACE -9007199254740992,-9007199254740992,NORTH";
+                var boardDimensions = {width: 5, height: 5};
+                var game = new Game(boardDimensions, commands);
+                game.processCommands();
+                expect(game.player.placeCurrent.xCoordinate).to.equal(undefined);
+                expect(game.player.placeCurrent.yCoordinate).to.equal(undefined);
+                expect(game.player.placeCurrent.faceDirection).to.equal(undefined);
+                expect(game.board.layout[["0,0"]]).to.equal("");
+            });
+            it('Prevents placing player for infinite sized PLACE coordinates', function () {
+                var commands = "PLACE Infinity,-Infinity,NORTH";
+                var boardDimensions = {width: 5, height: 5};
+                var game = new Game(boardDimensions, commands);
+                game.processCommands();
+                expect(game.player.placeCurrent.xCoordinate).to.equal(undefined);
+                expect(game.player.placeCurrent.yCoordinate).to.equal(undefined);
+                expect(game.player.placeCurrent.faceDirection).to.equal(undefined);
+                expect(game.board.layout[["0,0"]]).to.equal("");
+            });
+        });
+
         describe('WithValidReportCommands', function() {
             it('Reports current place of player on table whenever single REPORT command is read', function () {
                 var commands = "PLACE 3,3,NORTH";
