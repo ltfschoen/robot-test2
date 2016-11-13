@@ -6,13 +6,9 @@
 
 * Install [Node.js](https://nodejs.org) (includes NPM)
 
-* Install Mocha JS testing framework
+* Change into the cloned project root folder, install Mocha JS testing framework, and install dependencies in package.json, including Chai assertions
 
-`npm install mocha -g`
-
-* Install dependencies in package.json, including Chai assertions
-
-`npm install`
+`cd robot-test2 && npm install -g mocha && npm install && npm run test`
 
 ## Testing
 
@@ -21,10 +17,6 @@
 * Recursively find all tests in subdirectories
 
 `npm run test`
-
-## Assumptions
-
-* It is acceptable for the program to be case insensitive when interpreting input commands (i.e. both `PLACE 0,0,NORTH` and `place 0,0,north` are valid inputs)
 
 ## Run Local Samples
 
@@ -41,6 +33,10 @@
 4,0,EAST
 4,1,NORTH
 ```
+
+## Assumptions
+
+* It is acceptable for the program to be case insensitive when interpreting input commands (i.e. both `PLACE 0,0,NORTH` and `place 0,0,north` are valid inputs)
 
 ## Tech Stack
 
