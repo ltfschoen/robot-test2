@@ -4,7 +4,7 @@ var PlaceProposed = require('./place_proposed');
 var placeHelper = require('../helpers/place_helper');
 
 function Game(boardDimensions, commands) {
-    this.commands = commands ? commands.split('\n') : null;
+    this.commands = commands ? commands.split('\n') : "";
     this.board = new Board(boardDimensions);
     this.player = new Player();
 }
@@ -61,9 +61,3 @@ Game.prototype = function() {
 }();
 
 module.exports = Game;
-
-
-var commands = "#@$%GRE\nPLACE 3,2,NORTH\n#$%#%^\nMOVE\nMOVE\nRIGHT\nR#$R\n\nLEFT\nLEFT\nLEFT\nMOVE\nMOVE\nMOVE\nMOVE\nMOVE";
-var boardDimensions = { width: 5, height: 5};
-var game = new Game(boardDimensions, commands);
-game.processCommands();

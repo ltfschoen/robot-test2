@@ -2,6 +2,7 @@ var fs = require('fs');
 var chai = require('chai');
 var expect = chai.expect; // use expect style of Chai
 var InstructionReader = require('../src/file_reader');
+var Game = require('../src/game');
 
 describe("Instruction Reader", function() {
     describe('WithFilename', function () {
@@ -23,6 +24,19 @@ describe("Instruction Reader", function() {
                 // Propogate output when no errors
                 callback(null, instructions);
             });
+        });
+    });
+
+    describe('WithEmptyFile', function () {
+        it('Reads empty instructions without error', function () {
+            var commands = "";
+            var boardDimensions = {width: 5, height: 5};
+            var game = new Game(boardDimensions, commands);
+            game.processCommands();
+            expect(game.player.placeCurrent.xCoordinate).to.equal(undefined);
+            expect(game.player.placeCurrent.yCoordinate).to.equal(undefined);
+            expect(game.player.placeCurrent.faceDirection).to.equal(undefined);
+            expect(game.board.layout[["0,0"]]).to.equal("");
         });
     });
 });
